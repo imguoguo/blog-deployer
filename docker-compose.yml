@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  deployer:
+    build: .
+    volumes:
+      - ./app:/app
+      - ./ssh_files:/home/${SSH_USER}/.ssh
+    environment:
+      USER: ${SSH_USER}
+      PASSWORD: ${SSH_PASSWORD}
+    ports:
+      - "2233:22"
+    restart: always
