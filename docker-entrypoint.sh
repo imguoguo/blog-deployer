@@ -2,27 +2,28 @@
 
 #echo "PasswordAuthentication yes" >> /etc/ssh/sshd_config
 
-if [ -z $USER ]; then
+if [ -z $SSH_USER ] || [ $SSH_USER = "root" ]; then
   echo "No User Set, Find Password."
   sed -i "s/#PermitRootLogin.*/PermitRootLogin yes/g" /etc/ssh/sshd_config
-  if [ -n $PASSWORD ]; then
+  chown -R root /root
+  if [ -n $SSH_PASSWORD ]; then
     echo "Password Set!"
-    echo root:$PASSWORD | chpasswd
+    echo root:$SSH_PASSWORD | chpasswd
   else
     echo "Default password is root."
     echo root:root | chpasswd
   fi
 else 
-  echo "User $USER found!"
-  adduser -S $USER -G users -s /bin/sh
-  if [ -n $PASSWORD ]; then
-     echo $USER:$PASSWORD | chpasswd
+  echo "User $SSH_USER found!"
+  adduser -S $SSH_USER -G users -s /bin/sh
+  if [ -n $SSH_PASSWORD ]; then
+     echo $SSH_USER:$SSH_PASSWORD | chpasswd
   else 
-    echo "Password Not Found, Default Password is $USER"
-    echo $USER:$USER | chpasswd
+    echo "Password Not Found, Default Password is $SSH_USER"
+    echo $SSH_USER:$SSH_USER | chpasswd
   fi
-  chown -R $USER /home/$USER
-  chown -R $USER /app
+  chown -R $SSH_USER /home/$SSH_USER
+  chown -R $SSH_USER /app
 fi
 		
 /usr/sbin/sshd -D

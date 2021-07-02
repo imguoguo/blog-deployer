@@ -6,9 +6,10 @@ services:
     volumes:
       - ./app:/app
       - ./ssh_files:/home/${SSH_USER}/.ssh
+      - ./ssh_files:/root/.ssh
     environment:
-      USER: ${SSH_USER}
-      PASSWORD: ${SSH_PASSWORD}
+      SSH_USER: ${SSH_USER}
+      SSH_PASSWORD: ${SSH_PASSWORD}
     ports:
       - "2233:22"
     restart: always
