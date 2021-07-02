@@ -25,5 +25,6 @@ else
   chown -R $SSH_USER /home/$SSH_USER
   chown -R $SSH_USER /app
 fi
-		
+
+sh /usr/local/bin/custom.sh
 /usr/sbin/sshd -D

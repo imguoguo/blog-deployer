@@ -27,7 +27,9 @@
          - "2233:22"
    ```
 
-4. Run it!
+4. Put your own script in custom.sh
+
+5. Run it!
 
    ```
    docker-compose up -d

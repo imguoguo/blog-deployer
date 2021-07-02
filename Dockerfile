@@ -19,6 +19,7 @@ RUN apk update && \
 # 开放22端口
 EXPOSE 22
 COPY docker-entrypoint.sh /usr/local/bin/
+COPY custom.sh /usr/local/bin/
 RUN ["chmod", "+x", "/usr/local/bin/docker-entrypoint.sh"]
 ENTRYPOINT ["docker-entrypoint.sh"]
  
