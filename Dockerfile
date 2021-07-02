@@ -7,7 +7,7 @@ RUN echo "http://mirrors.aliyun.com/alpine/latest-stable/main/" > /etc/apk/repos
     echo "http://mirrors.aliyun.com/alpine/latest-stable/community/" >> /etc/apk/repositories
 
 RUN apk update && \
-    apk add --no-cache openssh tzdata git rsync except && \ 
+    apk add --no-cache openssh tzdata git rsync expect && \ 
     cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
        ssh-keygen -t dsa -P "" -f /etc/ssh/ssh_host_dsa_key && \
     ssh-keygen -t rsa -P "" -f /etc/ssh/ssh_host_rsa_key && \
