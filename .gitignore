@@ -1,3 +1,4 @@
 ssh_files/*
 .env
 docker-compose.yml
+custom.sh
